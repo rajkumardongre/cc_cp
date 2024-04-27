@@ -7,20 +7,20 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Post: a.model({
+  Todo: a.model({
     title: a.string().required(),
-    comments: a.hasMany("Comment", "postId"),
-    owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])])
+    completed: a.boolean().default(false).required(),
+    owner: a.string().authorization(allow => [allow.owner()])
   })
-  .authorization(allow => [allow.guest().to(['read']), allow.owner()])
+  .authorization(allow => [allow.owner()])
   ,
-  Comment: a.model({
-    content:  a.string().required(),
-    postId: a.id().required(),
-    post: a.belongsTo("Post", "postId"),
-    owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])])
-  })
-  .authorization(allow => [allow.guest().to(['read']), allow.owner()]),
+  // Comment: a.model({
+  //   content:  a.string().required(),
+  //   postId: a.id().required(),
+  //   post: a.belongsTo("Post", "postId"),
+  //   owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])])
+  // })
+  // .authorization(allow => [allow.guest().to(['read']), allow.owner()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

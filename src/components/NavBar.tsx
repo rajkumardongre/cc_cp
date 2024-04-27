@@ -43,7 +43,7 @@ const NavBar = ({isSignedIn} : {isSignedIn: boolean}) => {
             label: "Home",
         },{
             href: "/add",
-            label:"Add Title",
+            label:"Add Todo",
             loggedIn: true,
         },
     ]
