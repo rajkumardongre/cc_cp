@@ -21,7 +21,7 @@ export default async function Home() {
     )
   }
   // const router = useRouter();
-  const { data: todos, errors } = await cookieBasedCleint.models.Todo.list({
+  const { data: todos, errors } = await cookieBasedCleint.models.Task.list({
     authMode: "userPool",
     // authMode: "userPool",
   })

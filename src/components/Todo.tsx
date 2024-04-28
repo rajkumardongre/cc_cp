@@ -10,7 +10,7 @@ const Todo = ({
     onDelete,
     isSignedIn,
 }: {
-    todo: Pick<Schema["Todo"], "title" | "id" | "completed" | "createdAt" | "updatedAt">;
+    todo: Pick<Schema["Task"], "title" | "id" | "completed" | "createdAt" | "updatedAt" | "deadline">;
     onDelete: (id: string) => void;
     isSignedIn: boolean;
 }) => {
@@ -21,6 +21,14 @@ const Todo = ({
     }
     return (
         <div className="flex flex-col border bg-gray-100 w-full p-4 rounded">
+            
+            <p className="text-xs text-gray-700 pb-4">
+                {moment(new Date()).diff(todo.deadline) < 0 ? 
+                    <span className="bg-blue-500 text-white px-3 py-1 rounded-2xl">Deadline: {moment(todo.deadline).fromNow(true)} left</span>
+                :
+                    <span className="bg-red-500 text-white px-3 py-1 rounded-2xl">Deadline exceed {moment(todo.deadline).fromNow()}</span>
+                }
+            </p>
             <div
                 className=" flex justify-between"
             >
